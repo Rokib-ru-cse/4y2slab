@@ -2,7 +2,6 @@ package multimedia;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
