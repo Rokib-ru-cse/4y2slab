@@ -1,0 +1,2 @@
+CipherText = deFg123*&^
+OriginalText = abCd123*&^
