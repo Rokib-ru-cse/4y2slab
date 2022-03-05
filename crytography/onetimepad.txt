@@ -1,0 +1,2 @@
+CipherText = IPKLPSFHGQ
+OriginalText = ONETIMEPAD
