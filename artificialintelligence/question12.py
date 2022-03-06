@@ -1,11 +1,11 @@
-from email.mime import base
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.layers import Input,Dense,Flatten
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.layers import Input, Dense, Flatten, Conv2D, MaxPooling2D
 from tensorflow.keras import Model
-from tensorflow.keras.applications.vgg16 import VGG16
 import numpy as np
 
+# mnist = 70000,70000 = 60000+10000,60000+10000
 (trainX, trainY), (testX, testY) = mnist.load_data()
 
 train_indices = np.argwhere((trainY == 1) | (trainY == 2))
@@ -33,6 +33,7 @@ testX = np.stack((testX,)*3,axis=-1)
 
 M = trainX.shape[1]
 N = trainX.shape[2]
+
 base_model = VGG16(include_top=False,input_shape=(M,N,3))
 for layer in base_model.layers:
     layer.trainable = False

@@ -4,12 +4,12 @@ import java.util.Scanner;
 public class LehmannPrimalityTest {
 
     private static int lehmann(BigInteger bigInteger, int tries) {
-        long a = (long) (Math.random() * (bigInteger.longValue() - 1)) + 1;
-        long e = bigInteger.subtract(BigInteger.valueOf(1)).divide(BigInteger.valueOf(2)).longValue() ;
+        int a = (int) (Math.random() * (bigInteger.intValue() - 1)) + 1;
+        int e = bigInteger.subtract(BigInteger.valueOf(1)).divide(BigInteger.valueOf(2)).intValue() ;
         while(tries>0){
-            int result = ((int)Math.pow(a, e))%bigInteger.intValue();
+            int result = (int)(Math.pow(a,e))%bigInteger.intValue();
             if((result%bigInteger.intValue())==1||(result%bigInteger.intValue()==(bigInteger.subtract(BigInteger.valueOf(1)).intValue()))){
-                 a = (long) (Math.random() * (bigInteger.longValue() - 1)) + 1;
+                 a =  (int) (Math.random() * (bigInteger.intValue() - 1)) + 1;
                 tries--;
             }else{
                 return -1;

@@ -18,7 +18,6 @@ testY = testY[test_indices]
 
 trainY = to_categorical(trainY == 1, num_classes=2)
 testY = to_categorical(testY == 1, num_classes=2)
-
 trainX = trainX.astype(np.float32)
 testX = testX.astype(np.float32)
 
@@ -46,5 +45,5 @@ outputs = Dense(2)(x)
 model = Model(inputs, outputs)
 
 model.compile(optimizer='rmsprop', loss='mse', metrics=['accuracy'])
-model.fit(trainX, trainY, epochs=10, validation_split=0.2)
+model.fit(trainX, trainY, epochs=5, validation_split=0.2)
 model.evaluate(testX, testY)
