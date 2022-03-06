@@ -14,7 +14,7 @@ public class RSA_Algorithm {
 
     private static long generatePrime() {
         while (true) {
-            long x = (long) (Math.random() * 100) + 1;
+            long x = (long) (Math.random()*100) + 100;
             boolean y = isPrime(x);
             if (y) {
                 return x;
@@ -27,8 +27,11 @@ public class RSA_Algorithm {
             return false;
         } else if (n == 2) {
             return true;
-        } else {
-            for (long i = 2; i <= Math.sqrt(n); i++) {
+        }else if(n%2==0){
+            return false;
+        }
+         else {
+            for (long i = 3; i <= Math.sqrt(n)+2; i+=2) {
                 if (n % i == 0) {
                     return false;
                 }
@@ -39,7 +42,7 @@ public class RSA_Algorithm {
 
     public static long findCoPrimeOf(long n) {
         while (true) {
-            long x = (long) (Math.random() * 100000) + 1;
+            long x = (long) (Math.random()*n);
             if (gcd(x, n) == 1) {
                 return x;
             }
@@ -47,7 +50,7 @@ public class RSA_Algorithm {
     }
 
     private static long gcd(long a, long b) {
-        if (a % b == 0) {
+        if (a % b == 0) {   //if a%b==0 then b is gcd of a and b
             return b;
         } else {
             return gcd(b, a % b);
@@ -56,7 +59,7 @@ public class RSA_Algorithm {
 
     private static long modInverse(long a, long b) {
         for (long i = 1; i <= b - 1; i++) {
-            if ((a * i) % b == 1) {
+            if ((a * i) % b == 1) {  //(a*i)%b ==1 then i is the modinverse of a
                 return i;
             }
         }
@@ -100,12 +103,17 @@ public class RSA_Algorithm {
             // String plainText = "6882326879666683";
             long p = generatePrime();
             long q = generatePrime();
-            // n = p * q;
-            // e = findCoPrimeOf((p - 1) * (q - 1));
-            // d = modInverse(e, (p - 1) * (q - 1));
-            n = 3337;
-            e = 79;
-            d = 1019;
+            n = p * q;
+            e = findCoPrimeOf((p - 1) * (q - 1));
+            d = modInverse(e, (p - 1) * (q - 1));
+            System.out.println(p);
+            System.out.println(q);
+            System.out.println(n);
+            System.out.println(e);
+            System.out.println(d);
+            // n = 3337;
+            // e = 79;
+            // d = 1019;
             String cipherText = encrypt(plainText);
             String originalText = decrypt(cipherText);
             Formatter formatter = new Formatter("/home/rokib-ru-cse/Desktop/problems/4y2slab/crytography/rsa.txt");
@@ -117,6 +125,7 @@ public class RSA_Algorithm {
             System.out.println("originalText = " + originalText);
             input.close();
             formatter.close();
+            
         } catch (Exception e) {
             System.out.println(e);
         }
