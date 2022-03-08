@@ -1,3 +1,5 @@
+package crytography;
+
 import java.util.Scanner;
 import java.util.Random;
 import java.math.BigInteger;

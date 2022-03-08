@@ -1,3 +1,5 @@
+package crytography;
+
 import java.io.File;
 import java.util.Formatter;
 import java.util.HashMap;
