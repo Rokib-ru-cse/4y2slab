@@ -1,0 +1,8 @@
+abc vwx 
+def stu
+ghi pqr
+jkl mno
+mno jkl
+pqr ghi
+stu def
+vwx abc

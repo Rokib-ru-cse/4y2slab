@@ -25,37 +25,34 @@ public class DiffieHellman {
         }
         return true;
     }
-    public static long primitiveRoot(long n){
-        long a = eulerTotient(n);
-        for (int i = 1; i < n; i++) {
-            if((int)Math.pow(a, i)%n==1){
-                return i;
-            }
-        }
-        return 1;
-    }
-    public static long eulerTotient(long b){
-        int cnt = 0;
-        for (int i = 1; i < b; i++) {
-            if(gcd(i,b)==1){
-                cnt++;
-            }
-        }
-        return cnt;
-    }
+   
+    
 
+    public static int proot(long n) {
+        long a;
+        while(true){
+            a = (long)(Math.random()*(n-2)+1);
+            if(gcd(a,n)==1){
+                break;
+            }
+        }
+        for (int i = 2; ; i++) {
+            if(new BigInteger(""+a).pow(i).mod(new BigInteger(""+n)).intValue()==1){
+                return i; // i is the premitive root of n
+            }
+        }
+    }
     public static int gcd(long a,long b){
         if(a%b==0){
             return (int)b;
-        }
-        else{
+        }else{
             return gcd(b,a%b);
         }
     }
 
     public static void main(String[] args) {
         long n = generatePrime(); // prime
-        long a = primitiveRoot(n); // primitive root of n
+        long a = proot(n); // primitive root of n
         System.out.println(n);
         System.out.println(a);
         long Xa = 1 + (long) (Math.random() * 1000); // A Private Key

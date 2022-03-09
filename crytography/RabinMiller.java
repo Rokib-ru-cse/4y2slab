@@ -5,7 +5,7 @@ import java.util.Random;
 import java.math.BigInteger;
  
 /** Class MillerRabin **/
-public class MillerRabin
+public class RabinMiller
 {
     /** Function to check if prime or not **/
     public boolean isPrime(long n, int iteration)
@@ -62,7 +62,7 @@ public class MillerRabin
         Scanner scan = new Scanner(System.in);
         System.out.println("Miller Rabin Primality Algorithm Test\n");
         /** Make an object of MillerRabin class **/
-        MillerRabin mr = new MillerRabin();
+        RabinMiller mr = new RabinMiller();
         /** Accept number **/
         System.out.println("Enter number\n");
         long num = scan.nextLong();
