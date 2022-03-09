@@ -1,80 +1,66 @@
-package crytography;
+package crytography.practice;
 
-import java.util.Scanner;
-import java.util.Random;
 import java.math.BigInteger;
- 
-/** Class MillerRabin **/
-public class RabinMiller
-{
-    /** Function to check if prime or not **/
-    public boolean isPrime(long n, int iteration)
-    {
-        /** base case **/
-        if (n == 0 || n == 1)
-            return false;
-        /** base case - 2 is prime **/
-        if (n == 2)
-            return true;
-        /** an even number other than 2 is composite **/
-        if (n % 2 == 0)
-            return false;
- 
-        long s = n - 1;
-        while (s % 2 == 0)
-            s /= 2;
- 
-        Random rand = new Random();
-        for (int i = 0; i < iteration; i++)
-        {
-            long r = Math.abs(rand.nextLong());            
-            long a = r % (n - 1) + 1, temp = s;
-            long mod = modPow(a, temp, n);
-            while (temp != n - 1 && mod != 1 && mod != n - 1)
-            {
-                mod = mulMod(mod, mod, n);
-                temp *= 2;
-            }
-            if (mod != n - 1 && temp % 2 == 0)
+import java.util.Scanner;
+
+public class RabinMiller {
+
+
+    public static boolean miller(long num){
+        long m = num-1;
+        int b = 0;
+        while(m%2==0){
+            m/=2;
+            b++;
+        }
+        int j=0;
+        long a = (long)(Math.random()*(num-2)+2);
+        long z = new BigInteger(""+a).pow((int)m).mod(new BigInteger(""+num)).longValue();
+        long prev;
+        while(j<b&&z!=1){
+            prev = z;
+            z*=z;
+            z%=num;
+            if(z==1&&(prev!=1&&prev!=(num-1))){
                 return false;
+            }
+            j++;
         }
-        return true;        
-    }
-    /** Function to calculate (a ^ b) % c **/
-    public long modPow(long a, long b, long c)
-    {
-        long res = 1;
-        for (int i = 0; i < b; i++)
-        {
-            res *= a;
-            res %= c; 
+        if(z==1){
+            return true;
+        }else{
+            return false;
         }
-        return res % c;
+
+
     }
-    /** Function to calculate (a * b) % c **/
-    public long mulMod(long a, long b, long mod) 
-    {
-        return BigInteger.valueOf(a).multiply(BigInteger.valueOf(b)).mod(BigInteger.valueOf(mod)).longValue();
+
+    public static boolean rabin(long num,int tries){
+        if(num==0||num==1){
+            return false;
+        }else if(num ==2||num==3){
+            return true;
+        }else if(num%2==0){
+            return false;
+        }else{
+            boolean b = miller(num);
+            if(!b){
+                return false;
+            }
+        }
+        return true;
     }
-    /** Main function **/
-    public static void main (String[] args) 
-    {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Miller Rabin Primality Algorithm Test\n");
-        /** Make an object of MillerRabin class **/
-        RabinMiller mr = new RabinMiller();
-        /** Accept number **/
-        System.out.println("Enter number\n");
-        long num = scan.nextLong();
-        /** Accept number of iterations **/
-        System.out.println("\nEnter number of iterations");
-        int k = scan.nextInt();
-        /** check if prime **/
-        boolean prime = mr.isPrime(num, k);
-        if (prime)
-            System.out.println("\n"+ num +" is prime");
-        else
-            System.out.println("\n"+ num +" is composite");
- 
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the number to be tested as prime or not : \n");
+        long num = input.nextLong();
+        System.out.print("Enter the number iteration : \n");
+        int tries = input.nextInt();
+        if(rabin(num,tries)){
+            System.out.println("prime");
+        }else{
+            System.out.println("not prime");
+        }
     }
 }

@@ -5,14 +5,12 @@ public class Transposition {
         String msg = "abcdefg";
         char[][] carr = new char[100][100];
         char[] c = msg.toCharArray();
-        int k =0;
+        int k = 0;
         int i = 0;
         StringBuilder sb = new StringBuilder();
         for (; i < 2; i++) {
-            for (int j = i; j < c.length; j+=2) {
-                if(k<msg.length()){
-                    sb.append(c[j]);
-                }
+            for (int j = i; j < c.length; j += 2) {
+                sb.append(c[j]);
             }
         }
         System.out.println(sb);

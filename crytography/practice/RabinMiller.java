@@ -5,18 +5,17 @@ import java.util.Scanner;
 
 public class RabinMiller {
 
-
     public static boolean miller(long num){
         long m = num-1;
         int b = 0;
-        while(m%2==0){
+        if(m%2==0){
             m/=2;
             b++;
         }
         int j=0;
-        long a = (long)(Math.random()*(num-2)+2);
-        long z = new BigInteger(""+a).pow((int)m).mod(new BigInteger(""+num)).longValue();
-        long prev;
+        long a = (long)(Math.random()*(num-3)+2);
+        long z = new BigInteger(a+"").pow((int)m).mod(new BigInteger(num+"")).longValue();
+        long prev ;
         while(j<b&&z!=1){
             prev = z;
             z*=z;
@@ -31,9 +30,8 @@ public class RabinMiller {
         }else{
             return false;
         }
-
-
     }
+
 
     public static boolean rabin(long num,int tries){
         if(num==0||num==1){
@@ -49,6 +47,7 @@ public class RabinMiller {
             }
         }
         return true;
+        
     }
 
     public static void main(String[] args) {
