@@ -1,5 +1,3 @@
-package multimedia;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -44,14 +42,20 @@ public class LempelZivWelchCompression {
 
         String characters = String.valueOf((char) encodedText.remove(0).intValue());
         StringBuilder result = new StringBuilder(characters);
+        // System.out.println("xxxxxxxxxx "+characters);
+        // System.out.println(encodedText.get(0));
         for (int code : encodedText) {
+            System.out.println(code);
             String entry = dictionary.containsKey(code)
                     ? dictionary.get(code)
                     : characters + characters.charAt(0);
             result.append(entry);
+            System.out.println(entry+" === "+characters);
             dictionary.put(dictSize++, characters + entry.charAt(0));
             characters = entry;
         }
+        System.out.println(dictionary.get(256));
+        System.out.println(dictionary.get(257));
         return result.toString();
     }
 

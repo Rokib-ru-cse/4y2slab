@@ -1,4 +1,3 @@
-package multimedia;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -21,12 +20,10 @@ public class Huffman {
 	static HuffmanNode root;
 
 	public static void main(String[] args) {
-
-		String test = "ABCD1%$^";
+		String test = "HELLO";
 		System.out.println("Original Text = "+test);
 		String s = encode(test);
 		decode(s);
-
 	}
 
 	private static HuffmanNode buildTree(Map<Character, Integer> freq) {
