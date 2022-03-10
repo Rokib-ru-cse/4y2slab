@@ -12,8 +12,9 @@ public class lzw {
             map.put(i, String.valueOf((char)i));
         }
         String[] sarr = msg.split(" ");
-        String character = sarr[0];
-        StringBuilder output = new StringBuilder(map.get(Integer.parseInt(character)));
+        String character = String.valueOf(map.get(Integer.parseInt(sarr[0])));
+
+        StringBuilder output = new StringBuilder(map.get(Integer.parseInt(sarr[0])));
         List<String> list = new ArrayList<>(Arrays.asList(sarr));
         list.remove(0);
         sarr = list.toArray(new String[0]);
@@ -54,7 +55,7 @@ public class lzw {
 
 
     public static void main(String[] args) {
-        String msg = "aabbab";
+        String msg = "abbbabaaaaa";
         String encoded = encode(msg);
         String decoded = decode(encoded);
         System.out.println(encoded);
