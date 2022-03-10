@@ -53,9 +53,7 @@ public class Huffman {
 
 			sum.frequency = x.frequency + y.frequency;
 			sum.data = '-';
-
 			sum.left = x;
-
 			sum.right = y;
 			root = sum;
 
